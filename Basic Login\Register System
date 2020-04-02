@@ -1,0 +1,52 @@
+### Login/Register System
+
+import keyboard
+import os
+import time
+
+def login():
+	time.sleep(0.5)
+	os.system('cls')
+	print('Enter your Username')
+	username_input = input()
+	if os.path.isfile(username_input + '.txt'): # If you have a .txt file you need to type the full name, this function gives a true or false value 
+		print('Username Found!')
+		print('Enter your Password')
+		password_input = input()
+		if password_input in open(username_input + '.txt').read():
+			print('Password correct!')
+			start()
+		else:
+			print('Password Incorrect!')
+			start()
+	else:
+		print('Username not Found!')
+		start()
+
+def register():
+	time.sleep(0.5)
+	os.system('cls')
+	print('Enter a Username')
+	username = input()
+	print('Enter a Password')
+	password = input()
+	file = open(username + '.txt', 'w') # The 'w' means that if the file does not exsist make one, and the variable username is the name of the file
+	# you can remove the 'txt if you want to for now i will keep it to show you what the programm types'
+	file.write(username + ' = ' + password + '\n') # You can chose however you want to write it into your text file
+	file.close()
+	print('Successfully Registered!')
+	start()
+
+def start():
+	os.system('color 79') # Those commands (os.system() and time.sleep() are for the visuals and are not nessesary)
+	time.sleep(0.5)
+	os.system('cls')	
+	print('Press 1 to Register or Press 2 to Login') # You can use any hotkey to login or rgister
+	run = True
+	while run:
+		if keyboard.is_pressed('1'):	# Type the hotkey between the ''
+			register()
+		if keyboard.is_pressed('2'):
+			login()
+
+start()
